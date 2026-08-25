@@ -46,7 +46,6 @@ workflow {
     read_ch = channel.fromPath(params.input)
         .splitCsv(header: true)
         .map { row -> [row.sample_id, file(row.fastq_1), file(row.fastq_2)] }
-        .view() //print to debug TODO remove this
 
     // QC: Create FastQC report on input reads
     FASTQC(
