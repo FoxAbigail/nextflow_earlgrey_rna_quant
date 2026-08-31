@@ -10,7 +10,7 @@ process TRIMGALORE {
 
     output:
     tuple val(sampleName), path("*val_1.fq.gz"), path("*val_2.fq.gz"), emit: trimmed
-    path "*trimming_report.txt", emit: trimming_reports
+    path "*trimming_report.json", emit: trimming_reports
     path "*val_1_fastqc.{zip,html}", emit: fastqc_reports_1
     path "*val_2_fastqc.{zip,html}", emit: fastqc_reports_2
 
