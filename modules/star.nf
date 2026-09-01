@@ -3,6 +3,7 @@
 process STAR_INDEX {
 
     container "oras://community.wave.seqera.io/library/star_gzip:0e6cfd855da0cf8a"
+    cpus { threads }
 
     input:
     path genome
@@ -18,7 +19,7 @@ process STAR_INDEX {
     STAR --runMode genomeGenerate \\
         --genomeDir ./star_index \\
         --genomeFastaFiles ${genome} \\
-        --runThreadN ${threads} \\
+        --runThreadN ${task.cpus} \\
         --genomeSAindexNbases ${saindexnbases}
     """
 }
@@ -26,6 +27,7 @@ process STAR_INDEX {
 process STAR_ALIGN {
 
     container "oras://community.wave.seqera.io/library/star_gzip:0e6cfd855da0cf8a"
+    cpus { threads }
 
     input:
     tuple val(sampleName), path(read1), path(read2)
@@ -43,7 +45,7 @@ process STAR_ALIGN {
         --outFileNamePrefix ${sampleName}_ \\
         --readFilesIn ${read1} ${read2} \\
         --genomeDir ${index} \\
-        --runThreadN ${threads} \\
+        --runThreadN ${task.cpus} \\
         --readFilesCommand zcat \\
         --outSAMtype BAM Unsorted \\
         ${other_opts}

@@ -26,7 +26,7 @@ params {
     // genome fasta
     genome: Path
 
-    // number of cpus to use
+    // number of cpus for multithreaded processes
     ncpus: String = '1'
 
     // saindexnbases to use for STAR. Decrease for smaller genomes = min(14, log2(GenomeLength)/2 - 1). 10 is a conservative default.

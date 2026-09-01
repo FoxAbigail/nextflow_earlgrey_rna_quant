@@ -3,6 +3,7 @@
 process TRIMGALORE {
 
     container "oras://community.wave.seqera.io/library/trim-galore:2.3.0--a56e49e832976df4"
+    cpus { threads }
 
     input:
     tuple val(sampleName), path(read1), path(read2)
@@ -16,6 +17,6 @@ process TRIMGALORE {
 
     script:
     """
-    trim_galore --cores ${threads} --fastqc --paired ${read1} ${read2}
+    trim_galore --cores ${task.cpus} --fastqc --paired ${read1} ${read2}
     """
 }
